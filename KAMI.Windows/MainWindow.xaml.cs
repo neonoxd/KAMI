@@ -9,8 +9,6 @@ using System.Windows.Media;
 
 namespace KAMI.Windows
 {
-
-
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -60,7 +58,7 @@ namespace KAMI.Windows
         private void toggleButton_LostFocus(object sender, RoutedEventArgs e)
         {
             m_toggleButtonChange = false;
-            toggleButton.Content = FromVKey(m_kami.ToggleKey)?.ToString() ?? "Unbound";
+            toggleButton.Content = FromVKey(m_kami.GetToggleKey())?.ToString() ?? "Unbound";
         }
 
         private void mouse1Button_Click(object sender, RoutedEventArgs e)
@@ -83,7 +81,7 @@ namespace KAMI.Windows
         private void mouse1Button_LostFocus(object sender, RoutedEventArgs e)
         {
             m_mouse1ButtonChange = false;
-            mouse1Button.Content = FromVKey(m_kami.Mouse1Key)?.ToString() ?? "Unbound";
+            mouse1Button.Content = FromVKey(m_kami.GetMouse1Key())?.ToString() ?? "Unbound";
         }
 
         private void mouse2Button_Click(object sender, RoutedEventArgs e)
@@ -106,7 +104,7 @@ namespace KAMI.Windows
         private void mouse2Button_LostFocus(object sender, RoutedEventArgs e)
         {
             m_mouse2ButtonChange = false;
-            mouse2Button.Content = FromVKey(m_kami.Mouse2Key)?.ToString() ?? "Unbound";
+            mouse2Button.Content = FromVKey(m_kami.GetMouse2Key())?.ToString() ?? "Unbound";
         }
 
         private void sensitivityTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -133,7 +131,7 @@ namespace KAMI.Windows
             {
                 if (m_kami.Connected)
                 {
-                    infoLabel.Content = $"Version:      {version}\n";
+                    infoLabel.Content  = $"Version:      {version}\n";
                     infoLabel.Content += $"Title:        {title}\n";
                     infoLabel.Content += $"TitleId:      {titleId}\n";
                     infoLabel.Content += $"Game Version: {gameVersion}\n";
@@ -141,6 +139,11 @@ namespace KAMI.Windows
                     infoLabel.Content += $"Emu Status:   {m_kami.EmuStatus}\n";
                 }
                 statusLabel.Content = $"KAMI Status: {m_kami.Status}";
+                if (!m_toggleButtonChange)
+                {
+
+                    toggleButton.Content = key?.ToString() ?? "Unbound";
+                }
             }));
         }
 
